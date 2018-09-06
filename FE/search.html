@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+        <script src="jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<title>学生在线学习平台</title>
+    <style type="text/css">
+    .nav  ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color:rgb(255, 255, 255);
+            box-shadow: 0px 5px 2px rgb(139, 139, 139);
+        }
+    .nav  li {
+            float: left;
+            font-size: 18px;
+        }
+    .nav  li a {
+            display: block;
+            color: rgb(151, 148, 148);
+            text-align: center;
+            padding: 8px 8px;
+            text-decoration: none;
+        }
+
+    .nav  li a:hover {
+            color:rgb(0, 0, 0);
+        }
+    .nav .active{
+        color:black;
+        border-bottom: 3px solid #000;
+    }
+    .content ul{
+        margin-top: 40px;
+        margin-left: 30%;
+        overflow: hidden;
+    }
+    .content li{
+        margin:20px;
+        padding: 20px;
+        display: block;
+        width:400px;
+        border:solid 1px #000;
+        border-radius:8px;
+        float: left;
+    }
+    .title{
+        font-weight:bold;
+    }
+    .search{
+        margin-top: 30px;
+        text-align:center;
+        vertical-align:middle;
+    }
+    .content button{
+        overflow: hidden;
+        text-align:center;
+    }
+	</style>
+</head>
+<body>
+
+    <div class="nav">  
+        <ul>
+            <li><a href="index.html" class="active">首页</a> </li>
+            <li><a href="">个人中心</a></li>
+            <div align="right" id="bt">
+                <a onclick="ShowLoginText()" href="javascript:;">登录</a>
+                <a onclick="ShowRegisText()" href="javascript:;">注册</a>
+            </div>
+        </ul>
+    </div>  
+    <div class="search">
+            <input type="text" id="gathertime" placeholder="请输入出发时间...">
+            <input type="text" id="startpoint" placeholder="请输入起始地...">
+            <input type="text" id="destination" placeholder="请输入目的地...">
+             <button id="send">搜索</button>
+    </div>
+    <div class="content">
+        <ul>
+            <li class="course">
+                <span class="title">
+                    出发时间：
+                </span></br>
+                <span class="gather_time">
+                    
+                </span></br>
+                <span class="title">
+                    起始地：
+                </span></br>
+                <span class="start_point">
+                    
+                </span></br>
+                <span class="title">
+                    目的地：
+                </span></br>
+                <span class="destination_point">
+                        
+                </span></br> 
+                <span class="title">
+                    联系方式：
+                </span></br>
+                <span class="destination">
+                        
+                </span> 
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        $("#send").click(function(){
+            $.post("????",{
+                gathertime:$("#gathertime").val(),
+                startpoint:$("#startpoint").val(),
+                destination:$("#destination").val()
+                },  function(result){ 
+                var data = $.parseJSON(result);// 转成JSON
+                $(".courid").html(data[0].id);
+                $(".courname").html(data[0].names);
+                $(".courcont").html(data[0].content);
+                $(".cours").html(data[0].teacher);
+                }                    
+            );
+        });
+
+        </script>
+</body>
+</html>

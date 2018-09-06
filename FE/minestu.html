@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+        <script src="jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<title>学生在线学习平台</title>
+    <style type="text/css">
+    .nav  ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color:rgb(255, 255, 255);
+            box-shadow: 0px 5px 2px rgb(139, 139, 139);
+        }
+    .nav  li {
+            float: left;
+            font-size: 18px;
+        }
+    .nav  li a {
+            display: block;
+            color: rgb(151, 148, 148);
+            text-align: center;
+            padding: 8px 8px;
+            text-decoration: none;
+        }
+
+    .nav  li a:hover {
+            color:rgb(0, 0, 0);
+        }
+    .nav .active{
+        color:black;
+        border-bottom: 3px solid #000;
+    }
+    .content ul{
+        margin-top: 40px;
+        margin-left: 10px;
+        overflow: hidden;
+    }
+    .content li{
+        margin:20px;
+        padding: 20px;
+        display: block;
+        width:400px;
+        border:solid 1px #000;
+        border-radius:8px;
+        float: left;
+    }
+    .title{
+        font-weight:bold;
+    }
+    .content button{
+        overflow: hidden;
+        text-align:center;
+    }
+    .btn{
+        text-align: center;
+    }
+	</style>
+</head>
+<body >
+    <div class="nav">  
+        <ul>
+            <li><a href="index.html" >首页</a> </li>
+            <li><a href="course.html">课程中心</a></li>
+            <li><a href="" class="active" >我的课程</a> </li>
+            <li><a href="personals.html">个人中心</a></li>
+        </ul>
+    </div>  
+    <div class="content">
+        <ul class="mycour">
+           </ul>
+    </div>
+    <div class="btn">
+            <button onclick="choose()">选课</button>
+            <button onclick="deleted()">删除</button>
+    </div>
+
+    <script type="text/javascript">
+            function load(){
+                    $.post("mycou.php",{
+                    sid:'S031602131',
+                },  function(result){ 
+                    var data = $.parseJSON(result);// 转成JSON
+                    for (var i in result)
+                    {
+                        str='<li class="course"><span class="title">课程名：</span></br><span class="courname">'
+                            +data[i].names+
+                            '</span></br><span class="title">内容简介：</span></br><span class="courcont">'
+                            +data[i].content+
+                            '</span><span class="title"></br>任课教师：</span></br><span class="cours">'
+                            +data[i].teacher+
+                            '</span></br></li>'
+                        $('.mycour').append(str);
+                    }
+                }                    
+                );
+            };
+            window.load=load();
+            function choose(){
+                cid=prompt("请输入要选择的课程ID：");
+                $.post("choose.php",{
+                sid:'S031602131',
+                cid:cid,
+                },  function(result){
+                    alert('选课成功');
+                }                    
+            );
+            location.reload();
+        };
+        function deleted(){
+                cid=prompt("请输入要删除的课程ID：");
+                $.post("delect.php",{
+                sid:'S031602131',
+                cid:cid,
+                },  function(result){
+                    alert('删除成功');
+                }                    
+            );
+            location.reload();
+        };
+        </script>
+</body>
+</html>

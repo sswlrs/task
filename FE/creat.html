@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>学生在线学习平台</title>
+    <script src="jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+    .nav  ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color:rgb(255, 255, 255);
+            box-shadow: 0px 5px 2px rgb(139, 139, 139);
+        }
+    .nav  li {
+            float: left;
+            font-size: 18px;
+        }
+    .nav  li a {
+            display: block;
+            color: rgb(151, 148, 148);
+            text-align: center;
+            padding: 8px 8px;
+            text-decoration: none;
+        }
+
+    .nav  li a:hover {
+            color:rgb(0, 0, 0);
+        }
+    .nav .active{
+        color:black;
+        border-bottom: 3px solid #000;
+    }
+    .addc{
+        padding-top: 30px;
+        text-align: center;
+    }
+
+	</style>
+</head>
+<body>
+    <div class="nav">  
+        <ul>
+            <li><a href="index.html" >首页</a> </li>
+            <li><a href="course.html" >课程中心</a></li>
+            <li><a href="mine.html" class="active">我的课程</a> </li>
+            <li><a href="personalt.html">个人中心</a></li>
+        </ul>
+    </div>
+    <div class="myc">
+
+    </div>  
+    <div class="addc">
+        <div class="inputbox">
+            <input  type="text" id="Inputgathertime" placeholder="请输入出发时间" ><br>
+            <input  type="text" id="Inputaccount" placeholder="请输入人数" ><br>
+            <input  type="text" id="Inputstartpoint" placeholder="请输入起始地"><br>
+            <input  type="text" id="Inputdestination" placeholder="请输入目的地"><br>
+            <button onclick="Addcour()">提交</button>
+        </div>
+    </div>
+    <script>
+	function Addcour(){
+        $.post("????",{
+            gathertime:$('#Inputgathertime').val(),
+            account:$('#Inputaccount').val(),
+            startpoint:$('#Inputstartpoint').val(),
+            destination:$('#Inputdestination').val(),
+            },  function(result){
+                alert('提交成功！');
+            }                    
+        );
+    }
+    </script>
+</body>
+</html>
